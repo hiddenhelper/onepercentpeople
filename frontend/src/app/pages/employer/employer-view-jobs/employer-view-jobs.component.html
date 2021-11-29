@@ -1,0 +1,21 @@
+<app-layout-dashboard>
+  <div class="content">
+    <div class="flex flex-row flex-wrap">
+      <div class="flex-auto text-left w-full md:w-2/3">
+        <h1 class="text-xl">Jobs</h1>
+        <p class="text-sm">These are jobs you have created.</p>
+      </div>
+      <div class="flex-auto text-center md:text-right w-full md:w-1/3 mt-4 md:mt-0">
+        <a class="btn btn-filled primary" href="/employer/jobs/create">
+          <hero-icon class="text-sm" icon="plus-solid" icon_class="w-4 h-4"></hero-icon> Create New Job
+        </a>
+      </div>
+    </div>
+
+    <div class="job-list">
+      <div class="w-full">
+        <employer-jobs></employer-jobs>
+      </div>
+    </div>
+  </div>
+</app-layout-dashboard>

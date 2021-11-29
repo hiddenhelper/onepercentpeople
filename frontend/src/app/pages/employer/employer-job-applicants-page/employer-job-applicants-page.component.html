@@ -1,0 +1,14 @@
+<app-layout-dashboard>
+  <div class="">
+    <h1 class="text-xl">Review Applicants</h1>
+  </div>
+  <div class="flex flex-row flex-wrap justify-items-center space-x-4">
+    <div class="w-2/3">
+      <employer-job-responses [jobId]="jobId"></employer-job-responses>
+    </div>
+    <div class="flex-grow">
+      <employer-job-overview-card [jobId]="jobId"></employer-job-overview-card>
+    </div>
+  </div>
+
+</app-layout-dashboard>

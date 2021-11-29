@@ -1,0 +1,50 @@
+.site-title{
+  font-weight: bold;
+}
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .toolbar {
+  background: inherit;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: white;
+}
+.nav-spacer {
+  flex: 1 1 auto;
+}
+a {
+  text-decoration: none;
+}
+
+.sidenav {
+  width: 200px;
+  border: none!important;
+  min-height: 100vh;
+}
+.account-dropdown {
+  margin-left: 1rem;
+
+  p {
+    margin-bottom: 0;
+  }
+  .line1 {
+    display: inline-block;
+    margin-top: 13px;
+    font-size: 1.0em;
+  }
+  .line2 {
+    position: relative;
+    top: -7px;
+    font-size: 0.75em;
+  }
+}

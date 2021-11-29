@@ -1,0 +1,17 @@
+.heading-container {
+    .heading-left {
+        @apply text-gray-900 text-lg;
+    }
+
+    .heading-right {
+        @apply text-gray-800 text-sm;
+    }
+}
+
+.review {
+  .heading-container {
+    .heading-left {
+      @apply text-base flex-1 text-lg;
+    }
+  }
+}

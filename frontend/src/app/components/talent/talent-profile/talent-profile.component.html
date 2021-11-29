@@ -1,0 +1,12 @@
+<div class="flex flex-row space-x-6">
+  <div class="w-1/4">
+    <talent-profile-sidebar [currentTab]="currentTab" [items]="items" (menuEvents)="handleMenuEvents($event)"
+      [events]="eventsSubject.asObservable()"></talent-profile-sidebar>
+  </div>
+  <div class="w-3/4">
+    <talent-profile-basic *ngIf="currentTab === 'basic'"></talent-profile-basic>
+    <talent-profile-work-experience *ngIf="currentTab === 'work'"></talent-profile-work-experience>
+    <talent-profile-education *ngIf="currentTab === 'education'"></talent-profile-education>
+    <talent-profile-videos *ngIf="currentTab === 'videos'"></talent-profile-videos>
+  </div>
+</div>

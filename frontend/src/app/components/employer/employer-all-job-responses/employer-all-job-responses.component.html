@@ -1,0 +1,39 @@
+<div class="mt-5" fxLayout="row wrap" fxLayoutGap="5%">
+  <!-- <div fxLayout="column" fxFlex="25%">
+    <employer-all-job-responses-filters></employer-all-job-responses-filters>
+  </div> -->
+  <div fxLayout="column" fxFlex="100%" class="">
+    <!-- <div class="mb-3" fxLayoutAlign="space-between center">
+      <p class="text-sm font-bold mb-0">Showing: 123 filtered</p>
+      <div class="relative inline-block text-left">
+        <div class="rounded-lg text-lg mb-4" fxLayout="row" fxLayoutAlign="center center" role="group">
+          <button
+            class="rounded-l-lg px-5 py-2 mx-0 outline-none text-sm text-gray-700 border border-r-0 border-gray-400">Sort
+            By</button>
+          <button (click)="showSortingMenu = !showSortingMenu"
+            class="inline-flex justify-center rounded-md rounded-l-none border border-gray-400 p-2 bg-white text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none ring-transparent">
+            Most Recent
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div *ngIf="showSortingMenu"
+          class="origin-right absolute right-0 w-56 rounded shadow-lg bg-white ring-transparent focus:outline-none"
+          role="menu">
+          <div role="none">
+            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+              id="menu-item-0">Most Recent</a>
+            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+              id="menu-item-0">Most Recent</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <employer-job-response-list-item *ngFor="let job_response of job_responses" [job_response]="job_response">
+    </employer-job-response-list-item>
+  </div>
+</div>

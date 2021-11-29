@@ -1,0 +1,18 @@
+<form [formGroup]="profilePhotoForm">
+  <div class="card">
+    <div class='flex flex-row flex-wrap'>
+      <div class="form-control flex-column">
+        <label for="photo">Profile Photo</label>
+        <input id="photo" type="file" accept="image/png, image/jpeg" formControlName="photo"
+          (change)="onFileChanged($event)" placeholder="Profile Photo">
+        <div *ngIf="user?.profile_photo_url">
+          <img [src]="user?.profile_photo_url" class="rounded w-48 h-48 mt-8" />
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-filled primary mt-4" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+      <btn-spinner *ngIf="loading"></btn-spinner>
+      <span *ngIf="!loading">Save Photo</span>
+    </button>
+  </div>
+</form>

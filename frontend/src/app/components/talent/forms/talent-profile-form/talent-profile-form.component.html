@@ -1,0 +1,70 @@
+<form [formGroup]="userForm">
+  <div class="card">
+    <p class="card-title">About Me</p>
+    <div class="flex flex-row flex-wrap">
+      <div class="form-control w-1/2 px-2">
+        <label for="">First Name</label>
+        <input type="text" id="" formControlName="first_name" placeholder="Your first name">
+        <p class="error"
+          *ngIf="userForm.get('first_name')?.touched && userForm.get('first_name')?.hasError('required')">
+          First name is required
+        </p>
+      </div>
+
+      <div class="form-control w-1/2 px-2">
+        <label for="">Last Name</label>
+        <input type="text" id="" formControlName="last_name" placeholder="Your last name">
+        <p class="error" *ngIf="userForm.get('last_name')?.touched && userForm.get('last_name')?.hasError('required')">
+          Last name is required
+        </p>
+      </div>
+
+      <div class="form-control mb-4 w-1/2 px-2">
+        <label for="country">Country</label>
+        <ng-select [items]="countries" #select bindLabel="name" dropdownPosition="auto" bindValue="id"
+          labelForId="country" placeholder="Select the country you live in" [virtualScroll]="true"
+          formControlName="country" autocomplete="country-name">
+          <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+            <div><span>{{item.name}}</span></div>
+          </ng-template>
+        </ng-select>
+        <p class="error" *ngIf="userForm.get('country')?.touched && userForm.get('country')?.hasError('required')">
+          Country is required
+        </p>
+      </div>
+
+      <div class="form-control w-1/2 px-2">
+        <label for="">City</label>
+        <input type="text" id="" formControlName="city" placeholder="City">
+        <p class="error" *ngIf="userForm.get('city')?.touched && userForm.get('city')?.hasError('required')">
+          City is required
+        </p>
+      </div>
+
+      <div class="form-control w-1/2 px-2">
+        <label for="">Email</label>
+        <input type="email" id="" readonly formControlName="email" placeholder="Ex. pat@example.com">
+      </div>
+
+      <div class="form-control w-1/2 px-2">
+        <label for="">Phone</label>
+        <input type="tel" id="" formControlName="phone" placeholder="(xxx) xxx-xxxx">
+        <p class="error" *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.hasError('required')">
+          Phone is required
+        </p>
+      </div>
+    </div>
+
+    <p class="text-error-500 text-center" *ngIf="errorMessage">{{errorMessage}}</p>
+
+    <button class="btn btn-filled primary mt-4" (click)="onSubmit()" [disabled]="loading">
+      <btn-spinner *ngIf="loading"></btn-spinner>
+      <span *ngIf="!loading">Save</span>
+    </button>
+  </div>
+
+  <br />
+  <br />
+
+  <talent-profile-photo-form [user]="user"></talent-profile-photo-form>
+</form>

@@ -1,0 +1,26 @@
+.preview {
+  background: #FAFAFA;
+  padding-left: 5rem;
+  padding-top: 4rem;
+  height: 100vh;
+  overflow: hidden;
+
+  img {
+    // max-height: 50vh;
+    // width: auto;
+    // margin-left: 5rem;
+    // margin-top: auto;
+    // margin-bottom: auto;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .preview {
+    display: none!important;
+  }
+  .login {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}

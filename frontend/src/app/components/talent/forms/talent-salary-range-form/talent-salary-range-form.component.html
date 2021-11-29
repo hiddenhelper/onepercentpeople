@@ -1,0 +1,62 @@
+<form [formGroup]="salaryForm">
+  <div class="mt-10 mb-4" aria-label="Select an option" fxLayout="row wrap" fxLayoutGap="2%"
+    fxLayoutAlign="space-between">
+    <div *ngFor="let salaryPeriod of salaryPeriods" class="salary-range"
+      [class.checked]="salaryForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id" fxLayout="column" fxFlex="100%"
+      fxFlex.gt-sm="32%">
+      <div fxLayout="column" fxLayoutAlign="center center">
+
+        <label [for]="salaryPeriod.id"
+          class="role px-5 pt-4 pb-8 flex flex-row flex-wrap items-center hover:border-primary-500 border border-gray-400 bg-white rounded-lg w-full text-sm transition-all"
+          [ngClass]="{'border-primary-500 shadow': salaryForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id }">
+          <!-- <span class="bg-gray-100 px-3 py-2 mr-2 rounded-lg">{{salaryPeriod.icon}}</span> -->
+          <div class="w-full text-right">
+            <input type="radio" name="salaryPeriod" formControlName="salaryPeriod" [id]="salaryPeriod.id"
+              class="rounded-full text-primary-500" [value]="salaryPeriod"
+              [checked]="salaryForm.get('salaryPeriod')?.value?.id === salaryPeriod?.id" />
+          </div>
+          <div class="w-full text-center">
+            <div class="rounded-full p-3 bg-gray-100 w-16 h-16 inline-block"
+              [ngClass]="{'bg-primary-50 bg-opacity-50 text-primary-500': salaryForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id }">
+              <hero-icon [icon]="salaryPeriod.icon" icon_class="w-10 h-10"></hero-icon>
+            </div>
+          </div>
+          <div class="w-full text-center mt-3">
+            <span class="flex-grow text-base font-medium">
+              {{salaryPeriod?.title}}
+            </span>
+          </div>
+
+        </label>
+      </div>
+    </div>
+  </div>
+  <p class="text-error-500 w-full text-center" *ngIf="salaryForm.get('salaryPeriod')?.hasError('required')">
+    Salary period is required
+  </p>
+
+  <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="form-control">
+      <label for="">Min Amount</label>
+      <input type="number" id="" formControlName="salaryMin" id="salaryMin" placeholder="" required />
+      <p class="text-error-500" *ngIf="salaryForm.get('salaryMin')?.hasError('required')">Min salary is required</p>
+    </div>
+    <div class="form-control">
+      <label for="">Max Amount</label>
+      <input type="number" id="" formControlName="salaryMax" id="title" placeholder="" required />
+      <p class="text-error-500" *ngIf="salaryForm.get('salaryMax')?.hasError('required')">Max salary is required</p>
+    </div>
+    <div class="form-control">
+      <label for="salaryCurrency">Currency</label>
+      <input type="text" placeholder="Pick a currency" readonly aria-label="salaryCurrency" id="salaryCurrency"
+        value="USD - United States Dollar">
+    </div>
+  </div>
+
+  <p class="text-error-500 text-center w-full" *ngIf="errorMessage">{{errorMessage}}</p>
+
+  <button class="btn btn-filled primary" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Save</span>
+  </button>
+</form>

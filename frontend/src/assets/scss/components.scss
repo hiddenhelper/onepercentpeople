@@ -1,0 +1,82 @@
+@tailwind base;
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 bg-primary-500 text-white text-center rounded;
+
+    &.btn-filled {
+      &.primary {
+        @apply bg-primary-500 hover:bg-primary-800;
+      }
+      &.success {
+        @apply bg-success-500 hover:bg-success-700;
+      }
+      &.error {
+        @apply bg-error-500 hover:bg-error-700;
+      }
+      &.white {
+        @apply bg-white hover:bg-gray-100 text-gray-900;
+      }
+    }
+    &.btn-outlined {
+      @apply bg-transparent border-2 border-gray-300 text-gray-900 hover:bg-gray-300;
+
+      &.primary {
+        @apply border-primary-500 hover:border-primary-800 text-primary-500 hover:bg-primary-100 hover:text-primary-800;
+      }
+      &.success {
+        @apply border-success-500 hover:border-success-700 text-success-500 hover:bg-success-100 hover:text-success-800;
+      }
+      &.error {
+        @apply border-error-500 hover:border-error-700 text-error-500 hover:bg-error-100 hover:text-error-800;
+      }
+      &.white {
+        @apply border-white hover:border-gray-100 text-white hover:bg-gray-100 hover:text-gray-100;
+      }
+    }
+
+    &.btn-icon {
+      @apply bg-transparent	hover:text-primary-800;
+    }
+
+  }
+  .form-control {
+    input, textarea, select {
+      @apply px-3 py-3 placeholder-gray-600 text-gray-900 relative bg-gray-50 rounded-lg text-sm border-2 border-gray-300 outline-none focus:outline-none focus:ring-1 focus:ring-primary-600 w-full;
+      &.ng-pristine {}
+      &.ng-touched.ng-invalid {
+        @apply border-error-500;
+      }
+      &.ng-touched{}
+
+      &.ng-dirty{}
+      &.ng-touched.ng-valid{
+        @apply border-success-500;
+      }
+    }
+
+    .error {
+      @apply mb-0 text-sm text-error-500;
+    }
+
+    label {
+      @apply text-sm font-bold text-gray-900 pb-2 inline-block;
+    }
+  }
+  .card {
+    @apply px-5 py-5 rounded-md bg-white;
+
+    .card-title {
+      @apply font-bold text-gray-900 text-lg;
+    }
+  }
+
+  .tooltip {
+    @apply invisible absolute;
+  }
+
+  .has-tooltip:hover .tooltip {
+    @apply visible z-50 bg-white text-gray-800 shadow-lg rounded -mt-10 p-1 border-l-2 border-b border-primary-400 text-sm;
+  }
+
+}

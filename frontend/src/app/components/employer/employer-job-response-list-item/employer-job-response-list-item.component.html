@@ -1,0 +1,75 @@
+<div class="card mb-4">
+  <div class="flex items-center justify-between">
+    <div class="w-16">
+      <img class="w-12 h-12 rounded-full" [src]="job_response?.user?.profile_photo_url" />
+    </div>
+    <div class="flex-1 pl-1" fxLayout="row wrap" fxFlex>
+      <div fxLayout="column">
+        <div class="text-gray-900 font-semibold text-sm">
+          <a title="View Applicant" [href]="view_applicant_link">
+            {{job_response?.user?.first_name}} {{job_response?.user?.last_name}} <span
+              class="text-gray-800 font-semibold">- {{job_response?.user?.country?.name}}</span>
+          </a>
+        </div>
+        <div class="mt-2 text-gray-700 divide-x" fxLayout="row wrap" fxLayoutAlign="flex-start center">
+          <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="has-tooltip">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg> -->
+            <span class="text-xs">Aa</span>
+            <span class="ml-2 mr-3 text-xs text-gray-800">{{english_proficiency}}</span>
+            <i class="tooltip">English proficiency is {{english_proficiency}}.</i>
+          </div>
+          <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="pl-2 has-tooltip">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="ml-2 mr-3 text-xs text-gray-800">{{employment_type_preference}}</span>
+            <i class="tooltip">They prefer {{employment_type_preference}} roles.</i>
+          </div>
+          <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="pl-2 has-tooltip">
+            <span class="mr-3 text-xs">{{job_response?.created_at | dateAgo}}</span>
+            <i class="tooltip">They responded to your job {{job_response?.created_at | dateAgo}}.</i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="35%">
+      <div fxLayout="row wrap" fxLayoutAlign="flex-end center">
+        <button class="bg-gray-200 rounded px-2 py-2 mx-0 outline-none text-sm text-gray-900 border mr-4"
+          *ngIf="job_response.employer_review_status === 0">
+          Not Reviewed
+        </button>
+        <button class="bg-blue-50 rounded px-2 py-2 mx-0 outline-none text-sm text-blue-500 border mr-4"
+          *ngIf="job_response.employer_review_status === 1">
+          Interested
+        </button>
+        <button class="bg-red-50 rounded px-2 py-2 mx-0 outline-none text-sm text-red-500 border mr-4"
+          *ngIf="job_response.employer_review_status === 2">
+          Rejected
+        </button>
+        <app-dropdown title="Actions">
+          <a [href]="view_applicant_link"
+            class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-primary-50 hover:text-primary-600">
+            View Details
+          </a>
+          <button (click)="markInterested()"
+            class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-primary-50 hover:text-primary-600">
+            Interested
+          </button>
+          <button (click)="markRejected()"
+            class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-primary-50 hover:text-primary-600">
+            Reject
+          </button>
+          <!-- <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-primary-500 hover:text-white">
+            Delete
+          </a> -->
+        </app-dropdown>
+      </div>
+    </div>
+  </div>
+</div>

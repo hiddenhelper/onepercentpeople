@@ -1,0 +1,20 @@
+<p class='text-2xl mb-6'>Welcome {{user?.first_name}}</p>
+
+<div class='step-1' *ngIf="step === 1">
+  <p class='text-xl font-semibold'>Tell us about your company</p>
+  <employer-company-details-form (formEvent)="handleFormEvents($event)" [showButtons]="false"
+    [events]="eventsSubject.asObservable()" [company]="company" [showHeadings]="false"></employer-company-details-form>
+</div>
+
+<div class='step-2' *ngIf="step === 2">
+  <p class='text-xl font-semibold mb-4'>Post your first job</p>
+  <employer-create-job-stepper></employer-create-job-stepper>
+</div>
+
+<div *ngIf="step !== 2" class="mt-6">
+  <!-- <button type="button" class="btn btn-filled primary mr-6" (click)="backClicked()">Back</button> -->
+  <button type="button" class="btn btn-filled primary" (click)="nextClicked()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Next</span>
+  </button>
+</div>

@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm">
+
+  <div class="form-control mb-4">
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" id="email" placeholder="Your email address" required
+      autocomplete="email">
+    <p class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')">Email is
+      required</p>
+    <p class="error" *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address</p>
+  </div>
+
+  <div class="form-control mb-4">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" placeholder="Enter your password" required
+      autocomplete="current-password">
+    <p class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+      Password is required</p>
+    <p class="error" *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters
+    </p>
+  </div>
+
+  <p class="text-center">
+    <a class="text-primary-500 my-2 inline-block" [routerLink]="['/forgot-password']">Forgot password?</a>
+  </p>
+
+  <p class="text-error-500 text-center" *ngIf="errorMessage">{{errorMessage}}</p>
+
+  <button class="btn btn-filled primary" [disabled]="loading" (click)="onSubmit()">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Login</span>
+  </button>
+</form>

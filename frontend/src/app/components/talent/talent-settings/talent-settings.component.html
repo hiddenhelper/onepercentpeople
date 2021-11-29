@@ -1,0 +1,9 @@
+<div class="flex flex-row space-x-6">
+  <div class="w-1/4">
+    <talent-settings-sidebar [currentTab]="currentTab" [items]="items" (menuEvents)="handleMenuEvents($event)"
+      [events]="eventsSubject.asObservable()"></talent-settings-sidebar>
+  </div>
+  <div class="w-3/4">
+    <talent-settings-banking *ngIf="currentTab === 'banking'"></talent-settings-banking>
+  </div>
+</div>

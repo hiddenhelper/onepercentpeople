@@ -1,0 +1,18 @@
+<form [formGroup]="resumeForm">
+  <div class="">
+    <div class='flex flex-row flex-wrap'>
+      <div class="form-control flex-column">
+        <label for="resume">Resume / CV</label>
+        <input id="resume" type="file" accept="*" formControlName="resume" (change)="onFileChanged($event)"
+          placeholder="Resume File">
+        <!-- <div *ngIf="user?.profile_resume_url">
+          <img [src]="user?.profile_resume_url" class="rounded w-48 h-48 mt-8" />
+        </div> -->
+      </div>
+    </div>
+    <button class="btn btn-filled primary mt-4" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+      <btn-spinner *ngIf="loading"></btn-spinner>
+      <span *ngIf="!loading">Upload Resume</span>
+    </button>
+  </div>
+</form>

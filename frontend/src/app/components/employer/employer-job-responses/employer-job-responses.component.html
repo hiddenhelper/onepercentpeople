@@ -1,0 +1,19 @@
+<div class="" fxLayout="row wrap" fxLayoutAlign="center">
+  <!-- <div class="" fxLayout="column" fxFlex="100%" fxFlex.gt-sm="30%">
+    search input
+  </div> -->
+  <!-- <div class="" fxLayout="column" fxFlex="100%" fxFlex.gt-sm="30%"> -->
+  <!-- status -->
+  <!-- Should have these options: Not Reviewed, Interested, Rejected -->
+  <!-- </div> -->
+  <!-- <div class="" fxLayout="column" fxFlex="100%" fxFlex.gt-sm="30%"> -->
+  <!-- time -->
+  <!-- Should have these options: Latest, Oldest -->
+  <!-- </div> -->
+</div>
+
+<div class="" fxLayout="row wrap" fxLayoutAlign="center">
+  <div *ngFor="let response of responses" class="" fxLayout="column" fxFlex="100%" fxFlex.gt-sm="100%">
+    <employer-job-response-list-item [job_response]="response"></employer-job-response-list-item>
+  </div>
+</div>

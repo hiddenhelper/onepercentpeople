@@ -1,0 +1,123 @@
+<form [formGroup]="workExperienceForm" class="grid gap-4 grid-cols-2">
+  <!-- <div class="form-control">
+    <label for="">Resume</label>
+    <input type="file" id="" formControlName="resume" placeholder="Resume">
+  </div> -->
+
+  <div class="form-control">
+    <label for="">Job Title</label>
+    <input type="text" id="" formControlName="job_title" placeholder="The job title you held">
+    <p class="error"
+      *ngIf="workExperienceForm.get('job_title')?.touched && workExperienceForm.get('job_title')?.hasError('required')">
+      Job title is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="">Company</label>
+    <input type="text" id="" formControlName="company" placeholder="The company you worked for">
+    <p class="error"
+      *ngIf="workExperienceForm.get('company')?.touched && workExperienceForm.get('company')?.hasError('required')">
+      Company is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="country">Country</label>
+    <ng-select [items]="countries" #select bindLabel="name" dropdownPosition="auto" bindValue="id" labelForId="country"
+      placeholder="Select the country you worked from" [virtualScroll]="true" formControlName="country">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.name}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="workExperienceForm.get('country')?.touched && workExperienceForm.get('country')?.hasError('required')">
+      Country is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="">City</label>
+    <input type="text" id="" formControlName="city" placeholder="The city you worked in">
+    <p class="error"
+      *ngIf="workExperienceForm.get('city')?.touched && workExperienceForm.get('city')?.hasError('required')">
+      City is required
+    </p>
+  </div>
+
+  <!-- <input type="checkbox" class="">I currently work here. -->
+
+  <div class="form-control">
+    <label for="from_month">From Month</label>
+    <ng-select [items]="months" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="from_month" placeholder="To Month" [virtualScroll]="false" formControlName="from_month">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="workExperienceForm.get('from_month')?.touched && workExperienceForm.get('from_month')?.hasError('required')">
+      From month is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="from_year">From year</label>
+    <ng-select [items]="years" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="from_year" placeholder="To year" [virtualScroll]="false" formControlName="from_year">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="workExperienceForm.get('from_year')?.touched && workExperienceForm.get('from_year')?.hasError('required')">
+      From year is required
+    </p>
+  </div>
+
+
+  <div class="form-control">
+    <label for="to_month">To Month</label>
+    <ng-select [items]="months" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="to_month" placeholder="To Month" [virtualScroll]="false" formControlName="to_month">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="workExperienceForm.get('to_month')?.touched && workExperienceForm.get('to_month')?.hasError('required')">
+      To month is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="to_year">To year</label>
+    <ng-select [items]="years" #select bindLabel="title" dropdownPosition="auto" bindValue="value" labelForId="to_year"
+      placeholder="To year" [virtualScroll]="false" formControlName="to_year">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="workExperienceForm.get('to_year')?.touched && workExperienceForm.get('to_year')?.hasError('required')">
+      To year is required
+    </p>
+  </div>
+
+
+  <div class="form-control col-span-2">
+    <label for="description">Description</label>
+    <textarea id="description" class="w-full" formControlName="description"
+      placeholder="Tell us about the work you did"></textarea>
+    <p class="error"
+      *ngIf="workExperienceForm.get('description')?.touched && workExperienceForm.get('description')?.hasError('required')">
+      Description is required
+    </p>
+  </div>
+
+  <p class="col-span-2 text-center text-error-500">{{errorMessage}}</p>
+  <button class="btn btn-filled primary" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Save</span>
+  </button>
+</form>

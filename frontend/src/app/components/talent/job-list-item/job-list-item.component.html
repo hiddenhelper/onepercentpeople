@@ -1,0 +1,46 @@
+<div class="job-item">
+  <a [routerLink]="['/jobs', job.id]" title="View job details">
+    <div class="card hover:shadow-md transition-shadow duration-350 ease-in-out">
+      <div>
+        <div class="content flex flex-row flex-wrap align-center">
+          <div *ngIf="job.company?.logo_url" class="bg-white rounded p-1 shadow mr-5 flex-shrink self-center h-12 w-12">
+            <div class="bg-no-repeat bg-contain bg-center h-full w-full rounded-lg"
+              style="background-image: url({{job.company?.logo_url}})"></div>
+          </div>
+          <div class="flex-auto w-full lg:w-1/2">
+            <p class="text-xl">{{job.title}}</p>
+            <p>
+              <span class="posted-at">{{job.posted_at | dateAgo}}</span>
+            </p>
+          </div>
+        </div>
+
+        <hr class="text-gray-800 my-3" />
+
+        <div class="flex flex-row flex-wrap divide-x">
+          <div class="flex-shrink self-center pr-2">
+            <p>
+              <hero-icon icon="briefcase" class="text-gray-800" icon_class="w5 h-5"></hero-icon>
+              {{job?.role?.title}}
+            </p>
+          </div>
+
+          <div class="flex-shrink self-center px-2">
+            <p>
+              <hero-icon icon="clock" class="text-gray-800" icon_class="w5 h-5"></hero-icon>
+              {{job?.employment_type?.title}}
+            </p>
+          </div>
+
+          <div class="flex-shrink self-center px-2">
+            <p>
+              <hero-icon icon="currency-dollar" class="text-gray-800" icon_class="w5 h-5"></hero-icon>
+              ${{job?.min_salary}} - ${{job?.max_salary}} /{{job?.salary_period}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </a>
+</div>

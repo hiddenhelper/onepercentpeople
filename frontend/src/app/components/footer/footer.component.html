@@ -1,0 +1,56 @@
+<footer>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxLayout="column" fxFlex="90%" fxFlex.gt-xs="40%" fxFlex.gt-sm="25%">
+      <p class="text-2xl flex pb-3">
+        <svg-icon class="flex-initial mr-3" src="/assets/images/logos/logo-light.svg"></svg-icon> OnePercentPeople
+      </p>
+      <p>
+        One percent people is an exclusive network of the top employees in
+        the world.
+      </p>
+
+      <!-- <a class="hire-btn" [routerLink]="['/get-started/employer']">Hire Top Talent</a> -->
+      <!-- <div class="social">
+        <a rel="noreferrer noopener">
+          <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
+        </a>
+        <a rel="noreferrer noopener">
+          <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
+        </a>
+        <a rel="noreferrer noopener">
+          <fa-icon [icon]="faTwitter" size="2x"></fa-icon>
+        </a>
+      </div> -->
+    </div>
+    <div fxLayout="column" fxFlex="90%" fxFlex.gt-xs="45%" fxFlex.gt-xs="15%" class="list">
+      <p class="text-lg font-medium mb-4">Get Started</p>
+      <a [routerLink]="['/get-started/employer']" href>Hire Top Talent</a>
+      <a [routerLink]="['/get-started/talent']">Find a Job</a>
+    </div>
+    <div fxLayout="column" fxFlex="45%" fxFlex.gt-xs="45%" fxFlex.gt-xs="15%" class="list">
+      <p class="text-lg font-medium mb-4">Product</p>
+      <!-- <a [routerLink]="['/roles']" href>All Roles</a> -->
+      <!-- <a [routerLink]="['/employees']">All Employee</a> -->
+      <a [routerLink]="['/pricing']">Pricing</a>
+
+    </div>
+    <div fxLayout="column" fxFlex="45%" fxFlex.gt-xs="45%" fxFlex.gt-xs="15%" class="list">
+      <p class="text-lg font-medium mb-4">Company</p>
+      <a [routerLink]="['/about']" href>About</a>
+      <!-- <a [routerLink]="['/blog']">Blog</a> -->
+    </div>
+  </div>
+
+
+  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutAlign.gt-sm="end" class="copyright-row">
+    <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="50%" fxFlexOrder="2" fxFlexOrder.gt-sm="1">
+      &copy; OnePercentPeople {{current_year}}. All rights reserved
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutAlign.gt-sm="end" fxFlex="90%" fxFlex.gt-sm="50%" fxFlexOrder="1"
+      fxFlexOrder.gt-sm="2">
+      <a [routerLink]="['/privacy']">Privacy Policy</a>
+      <a [routerLink]="['/terms']">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,45 @@
+.gutters {
+  // margin-left: 5%;
+  // margin-right: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+@media screen and (max-width: 599px) {
+  .gutters {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+@media screen and (max-width: 959px) {
+  .gutters {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .gutters {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+}
+
+@media screen and (max-width: 1919px) {
+  .gutters {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .gutters{
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+

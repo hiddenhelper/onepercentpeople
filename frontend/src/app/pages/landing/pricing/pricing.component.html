@@ -1,0 +1,36 @@
+<app-layout-default>
+  <section>
+    <div class='gutters' fxLayout="row" fxLayoutAlign="center">
+      <div fxLayout="column" fxFlex="90%">
+        <h1 class='text-5xl font-medium text-center mb-14'>Pricing</h1>
+        <p class='text-md text-center mb-10'></p>
+      </div>
+    </div>
+
+    <div class="gutters flex flex-row flex-wrap content-center justify-center space-x-6">
+
+      <div class="w-full md:w-1/3" *ngFor="let plan of pricing.plans">
+        <div class="card border border-1">
+          <img class="" [src]="plan.icon" width="57" />
+          <p class="text-md text-center mt-4 font-semibold text-gray-800">{{plan.header}}</p>
+          <p class='text-5xl font-semibold mb-6 mt-6 text-center' [innerHTML]="plan.title"></p>
+          <p class='text-md text-gray-800 text-center'>{{plan.subtitle}}</p>
+          <div class="text-center">
+            <button class="btn btn-filled my-6 w-full font-bold"
+              [routerLink]="[plan.cta.link]">{{plan.cta.text}}</button>
+          </div>
+
+          <div class="mb-5 mt-4" fxLayout="row" fxLayoutAlign="center" *ngFor="let feature of plan.features">
+            <div fxLayout="column" fxFlex="10%">
+              <hero-icon icon="check-circle-solid"></hero-icon>
+            </div>
+            <div fxLayout="column" fxFlex="90%">
+              <p>{{feature.text}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</app-layout-default>

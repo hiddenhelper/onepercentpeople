@@ -1,0 +1,54 @@
+<form [formGroup]="companyForm">
+  <div class="card">
+    <p class="card-title" *ngIf="showHeadings">Company Profile</p>
+    <div class="flex flex-row flex-wrap justify-around gap-4">
+      <div class="form-control flex-column flex-grow">
+        <label for="name">Company Name</label>
+        <input type="text" formControlName="name" id="name" placeholder="Company Name">
+      </div>
+
+      <div class="form-control flex-column flex-grow">
+        <label for="url">Company URL</label>
+        <input type="text" formControlName="url" id="url" placeholder="Company URL">
+      </div>
+
+      <div class="form-control flex-column flex-grow">
+        <label for="industry">Industry</label>
+        <input type="text" class="opp-input" id="industry" formControlName="industry" placeholder="Industry">
+      </div>
+
+
+      <div class="form-control flex-column flex-grow">
+        <label for="phone">Phone</label>
+        <input type="text" formControlName="phone" id="phone" placeholder="Phone">
+      </div>
+
+      <div class="form-control flex-column w-full">
+        <label for="description">Description</label>
+        <textarea id="description" rows="5" formControlName="description"
+          placeholder="Describe your company. What does it do and what is it like to work there?"></textarea>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showHeadings">
+    <br />
+    <br />
+  </div>
+  <div class="card">
+    <p class="card-title" *ngIf="showHeadings">Company Identity</p>
+    <div class='flex flex-row flex-wrap'>
+      <div class="form-control flex-column">
+        <label for="logo" for="logo">Logo</label>
+        <input id="logo" type="file" accept="image/png, image/jpeg" formControlName="logo"
+          (change)="onFileChanged($event)" placeholder="Logo">
+      </div>
+    </div>
+  </div>
+
+  <p class="text-error-500 text-center" *ngIf="errorMessage">{{errorMessage}}</p>
+
+  <button class="btn btn-filled primary mt-6" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Save</span>
+  </button>
+</form>

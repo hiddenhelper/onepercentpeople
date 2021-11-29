@@ -1,0 +1,38 @@
+.first-line {
+  font-weight: 800;
+}
+.title {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.hero-image {
+  width: 100%
+}
+
+.text {
+  margin-bottom: 2rem;
+}
+button{
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+}
+button.talent {
+  font-weight: bold;
+}
+button.employer {
+ margin-right: 1rem;
+ margin-bottom: 1rem;
+ font-weight: bold;
+}
+.avatar-text{
+  color: #6D7D93;
+  span{
+    color: #081131;
+  }
+}
+
+@media (max-width: 500px) {
+  .avatar-text{
+    text-align: right;
+  }
+}

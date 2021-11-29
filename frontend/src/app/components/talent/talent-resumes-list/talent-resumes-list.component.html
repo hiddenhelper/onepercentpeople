@@ -1,0 +1,14 @@
+<div *ngFor="let resume of resumes" class="flex flex-row flex-wrap rounded shadow py-4 px-4 mb-5">
+  <div class='flex-grow self-center'>
+    <a class="hover:text-primary-500" [href]="resume.url" target="_blank" rel="noopener">{{resume.title}}</a>
+  </div>
+  <div class='flex-end'>
+    <button class="btn btn-outlined" (click)="deleteResume(resume)" [disabled]="deleting_ids.includes(resume.id)">
+      <btn-spinner *ngIf="deleting_ids.includes(resume.id)"></btn-spinner>
+      <span *ngIf="!deleting_ids.includes(resume.id)">
+        <hero-icon icon="trash" icon_class="text-error-500 hover:text-error-800 hover:cursor-pointer w-4 h-4">
+        </hero-icon>
+      </span>
+    </button>
+  </div>
+</div>

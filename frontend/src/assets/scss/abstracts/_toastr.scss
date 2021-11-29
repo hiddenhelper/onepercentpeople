@@ -1,0 +1,12 @@
+#toast-container>.toast-success {
+  @apply bg-success-500;
+}
+#toast-container>.toast-info {
+  @apply bg-blue-500;
+}
+#toast-container>.toast-warning {
+  @apply bg-warn-500;
+}
+#toast-container>.toast-error {
+  @apply bg-error-500;
+}

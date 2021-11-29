@@ -1,0 +1,16 @@
+.talent-card {
+  padding: 2rem;
+
+  // Large dashed border
+  background: linear-gradient(to right, #EAEFF3 50%, rgba(255, 255, 255, 0) 0%),
+  linear-gradient(#EAEFF3 50%, rgba(255, 255, 255, 0) 0%),
+  linear-gradient(to right, #EAEFF3 50%, rgba(255, 255, 255, 0) 0%),
+  linear-gradient(#EAEFF3 50%, rgba(255, 255, 255, 0) 0%);
+  background-position: top, right, bottom, left;
+  background-repeat: repeat-x, repeat-y;
+  background-size: 50px 1px, 1px 50px;
+}
+.previously-at {
+  margin-bottom: 2rem;
+  font-size: 0.9em;
+}

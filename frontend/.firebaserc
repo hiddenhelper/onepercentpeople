@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "one-percent-people"
+  },
+  "targets": {
+    "one-percent-people": {
+      "hosting": {
+        "onepercentpeople": [
+          "one-percent-people"
+        ]
+      }
+    }
+  }
+}

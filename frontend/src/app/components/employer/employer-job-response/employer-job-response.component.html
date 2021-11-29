@@ -1,0 +1,106 @@
+<div>
+  <div class="card">
+    <div>
+      <div class="flex flex-row items-center">
+        <div class="w-16">
+          <img class="w-12 h-12 rounded-full" [src]="jobResponse?.user?.profile_photo_url" />
+        </div>
+        <div>
+          <p class="text-lg font-semibold mb-0">{{jobResponse?.user?.first_name}} {{jobResponse?.user?.last_name}}</p>
+          <div class="mt-2 text-gray-700 divide-x" fxLayout="row wrap" fxLayoutAlign="flex-start center">
+            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="has-tooltip">
+              <span class="text-xs">Aa</span>
+              <span class="ml-2 mr-3 text-xs text-gray-800">{{english_proficiency}}</span>
+              <i class="tooltip">English proficiency is {{english_proficiency}}.</i>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="pl-2 has-tooltip">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="ml-2 mr-3 text-xs text-gray-800">{{employment_type_preference}}</span>
+              <i class="tooltip">They prefer {{employment_type_preference}} roles.</i>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="pl-2 has-tooltip">
+              <span class="mr-3 text-xs">{{jobResponse?.created_at | dateAgo}}</span>
+              <i class="tooltip">They responded to your job {{jobResponse?.created_at | dateAgo}}.</i>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" class="pl-2 has-tooltip">
+              <span class="mr-3 text-xs">{{jobResponse?.user?.country?.name}}</span>
+              <i class="tooltip">They live in {{jobResponse?.user?.country?.name}}.</i>
+            </div>
+          </div>
+        </div>
+
+        <p class="mb-0 pl-4">
+          <span class="text-gray-700 rounded bg-gray-100 p-2" *ngIf="jobResponse?.employer_review_status === 0">Not
+            Reviewed</span>
+          <span class="text-success-800 rounded bg-success-100 p-2"
+            *ngIf="jobResponse?.employer_review_status === 1">Interested</span>
+          <span class="text-error-500 rounded bg-error-100 p-2"
+            *ngIf="jobResponse?.employer_review_status === 2">Rejected</span>
+        </p>
+      </div>
+
+      <div [innerHtml]="talent_profile?.bio"></div>
+
+      <p class="text-sm font-semibold pt-8">Education History</p>
+      <div class="divide-y divide divide-primary-200 space-y-4">
+        <div *ngFor="let education of educations" class="divide-y divide space-y-2">
+          <p><span class="text-sm mr-2 mb-0">School:</span> <span>{{education.school_name}}</span></p>
+          <p><span class="text-sm mr-2 mb-0">Education Level:</span> <span>{{education.education_level?.title}}</span>
+          </p>
+          <p><span class="text-sm mr-2 mb-0">Location:</span> {{education.city}}, {{education.country?.name}}</p>
+          <p><span class="text-sm mr-2 mb-0">Dates:</span> {{education.from_month}}/{{education.from_year}} -
+            {{education.to_month}}/{{education.to_year}}</p>
+        </div>
+      </div>
+
+
+      <p class="text-sm font-semibold pt-8">Work History</p>
+      <div *ngFor="let work_history of work_histories">
+        <p><span class="text-sm mr-2 mb-0">Job Title:</span> {{work_history.job_title}}</p>
+        <p><span class="text-sm mr-2 mb-0">Company:</span> {{work_history.company}}</p>
+        <p><span class="text-sm mr-2 mb-0">Location:</span> {{work_history.city}}, {{work_history.country?.name}}</p>
+        <p><span class="text-sm mr-2 mb-0">Dates:</span> {{work_history.from_month}}/{{work_history.from_year}} -
+          {{work_history.to_month}}/{{work_history.to_year}}</p>
+        <p><span class="text-sm mr-2 mb-0">Description:</span> {{work_history.description}}</p>
+      </div>
+
+      <p class="text-sm font-semibold pt-8">Resume / CV</p>
+      <div *ngFor="let resume of resumes">
+        <a class="text-sm py-3 hover:text-primary-500" [href]="resume.url" target="_blank"
+          rel="noopener">{{resume.title}}</a>
+      </div>
+      <p class="text-sm" *ngIf="resumes.length < 1">
+        No resumes attached.
+      </p>
+
+    </div>
+  </div>
+
+
+  <div class="card mt-8">
+    <div>
+      <p class="text-sm">Videos of applicant</p>
+      <div class="divide-y divide">
+        <div *ngFor="let video of videos" class="py-8">
+          <p class='text-md text-center font-semibold'>{{video.title}}</p>
+          <video-player
+            [options]="{ fluid: true, autoplay: false, aspectRatio: '4:3', controls: true, sources: [{ src: video.url, type: 'video/mp4' }]}">
+          </video-player>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card mt-8" *ngIf="jobResponse">
+    <a id="chat"></a>
+    <div>
+      <p class="card-title">Message</p>
+      <chat-box [job_response]="jobResponse"></chat-box>
+    </div>
+  </div>
+</div>

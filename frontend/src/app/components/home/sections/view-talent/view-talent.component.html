@@ -1,0 +1,22 @@
+<section>
+  <div class="gutters" fxLayout="row" fxLayoutAlign="space-around">
+    <div fxLayout="column">
+      <p class='text-center text-primary-500'>Ready to Work</p>
+      <p class="text-5xl font-medium mb-16 text-center">Hire the best<br />Employees</p>
+    </div>
+  </div>
+
+  <div class="gutters" fxLayout="row wrap" fxLayoutAlign="space-around">
+    <div fxLayout="column" fxFlex="50%" fxFlex.gt-sm="25%" *ngFor="let talent of talents">
+      <home-talent-card [talent]="talent"></home-talent-card>
+    </div>
+  </div>
+
+  <div class="gutters" fxLayout="row wrap" fxLayoutAlign="space-around">
+    <div fxLayout="column" fxFlex="1 1">
+      <a class="btn-see-all btn btn-outlined primary" [routerLink]="['/get-started/employer']">See All
+        Talent</a>
+    </div>
+  </div>
+
+</section>

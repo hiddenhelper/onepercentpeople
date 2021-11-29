@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="flex flex-row items-center mb-6">
+    <div class="w-16">
+      <img class="w-12 h-12 rounded-full" [src]="jobResponse?.user?.profile_photo_url" />
+    </div>
+    <div>
+      <p class="mb-0">{{jobResponse?.user?.first_name}} {{jobResponse?.user?.last_name}}</p>
+      <p class="mb-0 text-xs"><span class="text-gray-800 font-semibold">{{jobResponse?.user?.country?.name}}</span>
+      </p>
+    </div>
+  </div>
+  <div class="space-y-3">
+    <button type="button" class="btn btn-filled success w-full" (click)="markInterested()">Interested</button>
+    <br />
+    <button type="button" class="btn btn-outlined error w-full" (click)="markRejected()">Reject</button>
+  </div>
+
+  <div class="space-y-3 mt-8">
+    <button type="button" class="btn btn-filled primary w-full" (click)="hire()">Hire</button>
+    <br />
+    <br />
+    <a [href]="chat_anchor_link" class="btn btn-outlined w-full">Send Message</a>
+  </div>
+</div>

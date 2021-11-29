@@ -1,0 +1,58 @@
+footer {
+  background: #2D2E35;
+  padding: 5rem;
+  padding-bottom: 1rem;
+  color: #fff;
+  margin-top: 2rem;
+
+  .list, .copyright-row {
+    a {
+      color: #fff;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      transition: all 300ms ease-in-out;
+      &:hover {
+        @apply text-primary-100;
+      }
+    }
+  }
+  .copyright-row {
+    margin-top: 8rem;
+    a {
+      margin-left: 2rem;
+    }
+  }
+  .hire-btn {
+    width: 10em;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .social {
+    margin-top: 1.5rem;
+    a {
+      padding: .5rem;
+      margin-right: 0.75rem;
+      transition: all 300ms ease-in-out;
+      &:hover {
+        @apply text-primary-500;
+      }
+    }
+  }
+  .social > a {
+    padding-left: 0;
+  }
+}
+
+
+@media (max-width: 599px) {
+  footer {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+  .list {
+    margin-top: 4rem;
+  }
+  .copyright-row {
+    text-align: center;
+  }
+}

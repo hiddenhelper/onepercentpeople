@@ -1,0 +1,109 @@
+<p class='text-3xl font-semibold mb-0'>Hello {{user?.first_name}} 👋</p>
+<p class='text-xl pb-6'>Tell us about yourself</p>
+
+<div class='step-1' *ngIf="step === 1">
+  <!-- Step 1 -->
+  <p class='text-2xl'>What is your level of English proficiency?</p>
+  <talent-english-proficiency-form (formEvent)="handleFormEvents($event)" [showButtons]="false"
+    [talentProfile]="talentProfile" [events]="eventsSubject.asObservable()">
+  </talent-english-proficiency-form>
+</div>
+
+<div class='step-2' *ngIf="step === 2">
+  <!-- Step 2 -->
+  <p class='text-2xl'>What type of job commitment do you prefer?</p>
+  <talent-employment-type-preference-form (formEvent)="handleFormEvents($event)" [showButtons]="false"
+    [talentProfile]="talentProfile" [events]="eventsSubject.asObservable()">
+  </talent-employment-type-preference-form>
+</div>
+
+<!-- <div class='step-3' *ngIf="step === 3"> -->
+<!-- Step 3 -->
+<!-- <p class='text-2xl'>What roles are you interested in applying to?</p>
+  <talent-preferred-roles-form (formEvent)="handleFormEvents($event)" [showButtons]="false"
+    [talentProfile]="talentProfile" [events]="eventsSubject.asObservable()"></talent-preferred-roles-form> -->
+<!-- </div> -->
+
+<div class='step-4' *ngIf="step === 4">
+  <!-- Step 4 -->
+  <p class='text-2xl'>What is your expected salary range?</p>
+  <talent-salary-range-form (formEvent)="handleFormEvents($event)" [showButtons]="false" [talentProfile]="talentProfile"
+    [events]="eventsSubject.asObservable()"></talent-salary-range-form>
+</div>
+
+<div class='step-5' *ngIf="step === 5">
+  <!-- Step 5 -->
+  <p class='text-2xl pb-6'>To get recruited, we need your work experience?</p>
+  <div *ngIf="work_histories.length < 1">
+    <talent-work-history-form (formEvent)="handleFormEvents($event)" [showButtons]="false"
+      [talentProfile]="talentProfile" [events]="eventsSubject.asObservable()">
+    </talent-work-history-form>
+  </div>
+  <div *ngIf="work_histories.length > 0">
+    <talent-work-history-form *ngFor="let work_history of work_histories" [work_history]="work_history"
+      (formEvent)="handleFormEvents($event)" [showButtons]="false" [talentProfile]="talentProfile"
+      [events]="eventsSubject.asObservable()"></talent-work-history-form>
+  </div>
+
+</div>
+
+<div class='step-6' *ngIf="step === 6">
+  <!-- Step 6 -->
+  <p class='text-2xl pb-b'>To get recruited, we need your education</p>
+
+  <div *ngIf="educations.length < 1">
+    <talent-education-form (formEvent)="handleFormEvents($event)" [showButtons]="false" [talentProfile]="talentProfile"
+      [events]="eventsSubject.asObservable()">
+    </talent-education-form>
+  </div>
+  <div *ngIf="educations.length > 0">
+    <talent-education-form *ngFor="let education of educations" [education]="education"
+      (formEvent)="handleFormEvents($event)" [showButtons]="false" [talentProfile]="talentProfile"
+      [events]="eventsSubject.asObservable()"></talent-education-form>
+  </div>
+</div>
+
+<div class='step-7' *ngIf="step === 7">
+  <!-- Step 7 -->
+  <p class='text-2xl mb-0'>Last step</p>
+  <p class='text-2xl text-primary-500 font-semibold'>Add a profile picture.</p>
+  <talent-profile-photo-form (formEvent)="handleFormEvents($event)" [showButtons]="false" [user]="user"
+    [talentProfile]="talentProfile" [events]="eventsSubject.asObservable()"></talent-profile-photo-form>
+
+</div>
+
+
+<div class='step-8' *ngIf="step === 8">
+  <!-- Step 8 -->
+  <p class='text-xl mb-0'>Introduce yourself in 3 short 2-minute video recordings.</p>
+  <p class='text-2xl text-primary-500 font-semibold text-center my-8'>Where did you work and what were your
+    responsibilities?</p>
+  <video-recorder video_prompt="Where did you work and what were your responsibilities?"
+    (formEvent)="handleFormEvents($event)" [showSubmitButton]="false" [events]="eventsSubject.asObservable()"
+    [video]="videos[0] || null">
+  </video-recorder>
+</div>
+
+<div class='step-9' *ngIf="step === 9">
+  <!-- Step 9 -->
+  <p class='text-xl mb-0'>Video 2 of 3</p>
+  <p class='text-2xl text-primary-500 font-semibold text-center my-8'>What are your career goals?</p>
+  <video-recorder video_prompt="What are your career goals?" (formEvent)="handleFormEvents($event)"
+    [showSubmitButton]="false" [events]="eventsSubject.asObservable()" [video]="videos[1] || null"></video-recorder>
+</div>
+
+<div class='step-10' *ngIf="step === 10">
+  <!-- Step 10 -->
+  <p class='text-xl mb-0'>Last video</p>
+  <p class='text-2xl text-primary-500 font-semibold text-center my-8'>What are you looking for in your next Company?</p>
+  <video-recorder video_prompt="What are you looking for in your next Company?" (formEvent)="handleFormEvents($event)"
+    [showSubmitButton]="false" [events]="eventsSubject.asObservable()" [video]="videos[2] || null"></video-recorder>
+</div>
+
+<div class='mt-12'>
+  <button type="button" class="btn btn-outlined mr-6" (click)="backClicked()" [disabled]="loading">Back</button>
+  <button type="button" class="btn btn-filled primary" (click)="nextClicked()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Next</span>
+  </button>
+</div>

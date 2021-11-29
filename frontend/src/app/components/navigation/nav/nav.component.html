@@ -1,0 +1,25 @@
+<div class="flex flex-row nav py-3 px-2">
+  <a class="text-primary-500 flex flex-row site-title text-sm" [routerLink]="['/']" title="One Percent People | Home">
+    <svg-icon class="flex-initial" src="/assets/images/logos/logo.svg"></svg-icon>
+    <span class="flex-initial ml-4 font-semibold">One Percent<br />People</span>
+  </a>
+  <span class="nav-spacer"></span>
+  <div *ngIf="isHandset$ | async; else desktop">
+    <button type="button" aria-label="Toggle sidenav" (click)="toggleDropdown()">
+      <hero-icon icon="menu" aria-label="Side nav toggle icon"></hero-icon>
+    </button>
+  </div>
+  <ng-template #desktop>
+    <button *ngFor="let link of links" class="btn btn-filled white text-gray-800"
+      [routerLink]="[link.href]">{{link.text}}</button>
+  </ng-template>
+</div>
+<div class="dropdown bg-primary-500" fxLayout="row" fxLayoutAlign="center" *ngIf="dropdownActive">
+  <div fxLayout="column">
+    <ul class="list-none">
+      <li *ngFor="let link of links">
+        <button class="btn btn-filled primary" [routerLink]=" [link.href]">{{link.text}}</button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="">
+  <div *ngIf="!has_chat" class="w-full text-center">
+    <button type="button" class="btn btn-outlined primary" (click)="startConversation()">Start a Conversation</button>
+  </div>
+  <div *ngIf="has_chat" #talkjsContainer style="height: 500px">
+    <app-page-loading></app-page-loading>
+  </div>
+</div>

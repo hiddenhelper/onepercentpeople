@@ -1,0 +1,46 @@
+<div class="flex flex-row toolbar">
+  <a class="ml-4 my-4 text-primary-500 flex flex-row site-title text-sm" [routerLink]="['/']"
+    title="One Percent People | Home">
+    <svg-icon class="flex-initial" src="/assets/images/logos/logo.svg"></svg-icon>
+    <span class="flex-initial ml-4 font-semibold">One Percent<br />People</span>
+  </a>
+  <span class="nav-spacer"></span>
+  <div class="flex mr-8">
+    <img *ngIf="user?.profile_photo_url" [src]="user?.profile_photo_url" width="40"
+      class="rounded-full h-12 w-12 my-auto" />
+    <div *ngIf="!user?.profile_photo_url"
+      class="rounded-full bg-gray-400 text-gray-800 p-2 h-12 w-12 text-xl text-center my-auto">
+      {{initials}}
+    </div>
+
+    <div class='account-dropdown'>
+      <p>
+        <span class='line1'>{{user?.first_name }} {{user?.last_name}}</span>
+        <br />
+        <span class='line2'>{{user?.email}}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-row ">
+  <div class="sidenav">
+    <div #sidenav class='bg-white'>
+
+      <div *ngFor="let section of sideNavigationItems">
+        <p class="text-gray-800 text-xs pl-5">{{section.title}}</p>
+        <a *ngFor="let item of section.items" [routerLink]="[item.href]"
+          class="flex flex-row justify-start items-center space-x-3.5 ml-6 pl-4 mr-5 py-2 rounded-md group hover:bg-primary-50">
+          <hero-icon *ngIf="item.icon" [icon]="item.icon"
+            class="text-gray-700 flex-col text-sm ml group-hover:text-primary-500"></hero-icon>
+          <p class="text-gray-800 flex-col text-sm group-hover:text-primary-500 mb-0"> {{item.text}} </p>
+        </a>
+        <hr class="mx-10 my-5" />
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-200 w-full">
+    <ng-content></ng-content>
+  </div>
+</div>

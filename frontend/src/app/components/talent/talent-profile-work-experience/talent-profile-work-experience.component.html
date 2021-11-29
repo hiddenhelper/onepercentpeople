@@ -1,0 +1,16 @@
+<div class="card mb-6">
+  <p class="card-title mb-4">Resumes</p>
+  <talent-resumes-list></talent-resumes-list>
+
+  <talent-resume-form class="py-4 block"></talent-resume-form>
+</div>
+<div class="card">
+  <p class="card-title">Work Experience</p>
+  <div class="divide-y divide-gray-800">
+    <talent-work-history-form class="py-4 block" *ngFor="let work_history of work_histories"
+      [work_history]="work_history">
+    </talent-work-history-form>
+
+    <talent-work-history-form class="py-4 block"></talent-work-history-form>
+  </div>
+</div>

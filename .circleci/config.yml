@@ -1,0 +1,112 @@
+version: 2.1
+
+orbs:
+  gcp-cli: circleci/gcp-cli@2.2.0
+
+workflows: # Define a Workflow running the build jobs, then the deploy job
+  build-deploy:
+    jobs:
+      - build_frontend
+      - build_backend:
+          requires:
+            - build_frontend
+      - deploy:
+          requires:
+            - build_frontend
+            - build_backend
+          filters:
+            branches:
+              only: main # Only deploys when the commit is on the Main branch
+
+jobs:
+  build_frontend:
+    working_directory: ~/OnePercentPeople
+    docker:
+      - image: cimg/node:16.5
+    steps:
+      - checkout
+      - run:
+          name: Update Server APT
+          command: sudo apt-get update
+      - run:
+          name: Install Angular CLI
+          command: sudo npm install -g @angular/cli@11.0.5 > /dev/null
+      - run:
+          name: Install Frontend Dependencies
+          command: cd frontend && npm install
+      - run:
+          name: Build Angular Production
+          command: cd frontend && sudo npm run build:prod
+
+  build_backend:
+    working_directory: ~/OnePercentPeople
+    docker:
+      - image: cimg/node:16.5
+    steps:
+      - checkout
+      - run:
+          name: Install Typescript
+          command: sudo npm install -g typescript
+      - run:
+          name: Install Backend Dependencies
+          command: cd backend && npm install
+      - run:
+          name: Build Express App
+          command: cd backend && npm run build
+
+  deploy:
+    working_directory: ~/OnePercentPeople
+    docker:
+      - image: cimg/node:16.5
+    steps:
+      - checkout
+      - run:
+          name: Build Frontend
+          command: sudo npm install -g @angular/cli@11.0.5 > /dev/null; cd frontend && npm install && sudo npm run build:prod
+      - run:
+          name: Install backend packages
+          command: sudo npm install -g typescript; cd backend && npm install
+      - run:
+          name: Build backend
+          command: cd backend && npm run build
+      - run:
+          name: Remove local node_modules
+          command: cd backend && rm -rf node_modules
+      - run:
+          name: Install Firebase CLI
+          command: sudo npm install -g firebase-tools
+      - gcp-cli/install
+      - gcp-cli/initialize
+      - run:
+          name: Update Google Cloud CLI
+          command: gcloud components update
+      - run:
+          name: Echo build num
+          command: echo ${CIRCLE_BUILD_NUM}
+      - run:
+          name: Create build release directory
+          command: gcloud compute ssh opp@node-api-server --quiet --command="cd ~/api.onepercentpeople.com/releases && mkdir ${CIRCLE_BUILD_NUM}"
+      - run:
+          name: Copy files to server
+          command: gcloud compute scp --quiet --recurse backend/* opp@node-api-server:~/api.onepercentpeople.com/releases/${CIRCLE_BUILD_NUM}
+      - run:
+          name: Install Node Modules on remote
+          command: gcloud compute ssh opp@node-api-server --quiet --command="cd ~/api.onepercentpeople.com/releases/${CIRCLE_BUILD_NUM} && npm install"
+      - run:
+          name: Copy .env
+          command: gcloud compute ssh opp@node-api-server --quiet --command="cp -p ~/api.onepercentpeople.com/.env ~/api.onepercentpeople.com/releases/${CIRCLE_BUILD_NUM}/.env"
+      - run:
+          name: Run Migrations
+          command: gcloud compute ssh opp@node-api-server --quiet --command="cd ~/api.onepercentpeople.com/releases/${CIRCLE_BUILD_NUM} && knex migrate:latest"
+      - run:
+          name: Create symlink to current relesae
+          command: gcloud compute ssh opp@node-api-server --quiet --command="rm ~/api.onepercentpeople.com/current && ln -sf ~/api.onepercentpeople.com/releases/${CIRCLE_BUILD_NUM} ~/api.onepercentpeople.com/current"
+      - run:
+          name: PM2 Start Backend
+          command: gcloud compute ssh opp@node-api-server --quiet --command="pm2 restart ~/api.onepercentpeople.com/current/dist/server.js"
+      - run:
+          name: Deploy Frontend to Firebase Hosting
+          command: cd frontend && firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+      - run:
+          name: Prune Releases
+          command: gcloud compute ssh opp@node-api-server --quiet --command="cd ~/api.onepercentpeople.com/releases && ~/api.onepercentpeople.com/.scripts/prune-builds.sh -k 5"

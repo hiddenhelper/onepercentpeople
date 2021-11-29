@@ -1,0 +1,10 @@
+<div class='content' fxLayout="row wrap" fxLayoutAlign="center">
+  <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="90%">
+    <app-job-list-item *ngFor="let job of jobs" [job]="job"></app-job-list-item>
+  </div>
+
+  <!-- <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="90%"> -->
+  <!-- <mat-paginator [length]="100" [pageSize]="25" (page)="pageEvent = getPaginatedData($event)">
+    </mat-paginator> -->
+  <!-- </div> -->
+</div>

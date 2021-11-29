@@ -1,0 +1,54 @@
+section {
+  background: #fff;
+  img {
+    margin:auto;
+  }
+  .role-title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
+@media only screen and (max-width: 960px) {
+.arrow.top {
+  display: none;
+}
+.arrow.bottom {
+  display: inline-block;
+  transform:rotate(90deg);
+}
+.step-1, .step-2 {
+  margin-bottom: 10rem;
+
+  .arrow {
+    position: relative;
+    top: 4.5rem;
+  }
+}
+}
+@media only screen and (min-width: 960px) {
+  .step-1, .step-2 {
+    margin-top: 0;
+    .arrow.bottom {
+      display: none;
+    }
+    .arrow.top {
+      display: inline-block;
+    }
+  }
+  .step-1 {
+    .arrow {
+      position: absolute;
+      left: 33%;
+      margin-top: 1rem;
+      margin-right: 40px;
+    }
+  }
+  .step-2 {
+    .arrow {
+      position: absolute;
+      right: 33%;
+      margin-top: 1rem;
+      margin-left: 40px;
+    }
+  }
+}

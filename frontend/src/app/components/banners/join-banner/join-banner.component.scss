@@ -1,0 +1,55 @@
+.card {
+  padding: 4rem;
+  @apply bg-primary-500;
+
+  .card-title {
+    margin-bottom: 1rem;
+  }
+  button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+  }
+}
+.flare {
+  position: relative;
+  top: -50%;
+  .one{
+    position: relative;
+    top: -1rem;
+  }
+  .two{
+    position: relative;
+    right: -70%;
+    top: 4rem;
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .flare .one {
+    top: 2rem;
+  }
+
+  .flare .two {
+    right: -60%;
+  }
+}
+
+@media (max-width: 676px) {
+  .flare {
+    top: -40%;
+  }
+  .flare .one {
+    top: 2rem;
+    opacity: 0.2;
+  }
+
+  .flare .two {
+    right: -50%;
+    opacity: 0.2;
+  }
+}

@@ -1,0 +1,40 @@
+<div class="job-item">
+  <div class="card">
+    <div>
+      <div class='content' class="flex flex-row flex-wrap">
+        <div *ngIf="job.company?.logo_url" class="bg-white rounded p-1 shadow mr-5 flex-shrink self-center h-12 w-12">
+          <div class="bg-no-repeat bg-contain bg-center h-full w-full rounded-lg"
+            style="background-image: url({{job.company?.logo_url}})"></div>
+        </div>
+        <div class="flex-auto w-4/5 lg:w-1/2">
+          <p class="text-xl"><a [routerLink]="['/employer/jobs', job.id]">{{job.title}}</a></p>
+          <p>
+            <hero-icon class="text-gray-800" icon="briefcase" icon_class="w-4 h-4"></hero-icon>
+            <span class="ml-2 text-gray-800">{{job.role?.title}}</span>
+            <span class="text-gray-400 font-bold mx-2">•</span>
+            <span class="text-gray-800">{{job.employment_type?.title}}</span>
+            <span class="text-gray-400 font-bold mx-2">•</span>
+            <span class="text-gray-800">{{job.posted_at || job.created_at | dateAgo}}</span>
+          </p>
+          <p>
+          </p>
+        </div>
+        <div class="flex flex-row flex-wrap flex-auto mt-4 lg:mt-0 text-center lg:text-left">
+          <div class="applicants flex-auto self-center">
+            {{job.job_responses?.length}} Applied
+          </div>
+          <div class="flex-auto self-center">
+            <p class="text-success-500">
+              <span class="text-gray-700 rounded bg-gray-100 p-2" *ngIf="!job?.posted_at">Draft</span>
+              <span class="text-error-500 rounded bg-error-100 p-2" *ngIf="job?.paused_at === 2">Paused</span>
+              <span class="text-success-800 rounded bg-success-50 p-2" *ngIf="job?.posted_at">Open</span>
+            </p>
+          </div>
+          <div class="flex-auto self-center">
+            <a [routerLink]="['/employer/jobs', job.id]">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

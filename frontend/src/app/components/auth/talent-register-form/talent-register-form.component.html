@@ -1,0 +1,60 @@
+<form [formGroup]="registerForm">
+
+
+  <div class="form-control mb-4">
+    <label for="">Full Name</label>
+    <input type="text" id="" formControlName="fullName" placeholder="Your full name" required autocomplete="name">
+  </div>
+  <div class="form-control mb-4">
+    <label for="">Email</label>
+    <input type="email" id="" formControlName="email" placeholder="Your email address" required autocomplete="email">
+    <p class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')">
+      Email is required
+    </p>
+    <p class="error" *ngIf="registerForm.get('email')?.hasError('email')">Please enter a valid email address</p>
+  </div>
+  <div class="form-control mb-4">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" placeholder="Enter a strong password" required
+      autocomplete="new-password">
+    <p class="error"
+      *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')">
+      Password is required</p>
+    <p class="error" *ngIf="registerForm.get('password')?.hasError('minlength')">Password must be at least 8 characters
+    </p>
+  </div>
+
+  <div class="form-control mb-4">
+    <label for="country">Country</label>
+    <ng-select [items]="countries" #select bindLabel="name" dropdownPosition="auto" bindValue="id" labelForId="country"
+      placeholder="Select the country you live in" [virtualScroll]="true" formControlName="country"
+      autocomplete="country-name">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.name}}</span></div>
+      </ng-template>
+    </ng-select>
+  </div>
+
+  <div class="form-control mb-4">
+    <label for="">City</label>
+    <input type="text" id="" formControlName="city" placeholder="City you live in" required
+      autocomplete="address-level2">
+  </div>
+
+  <div class="my-6">
+    <input type="checkbox" id="terms" formControlName="terms">
+    <label for="terms" class="ml-2">I agree to Terms and Conditions, Privacy Policy,
+      and Cookie Policy.</label>
+  </div>
+
+  <p class="text-error-500 text-center" *ngIf="errorMessage">{{errorMessage}}</p>
+
+  <button class="btn btn-filled primary" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Get Started</span>
+  </button>
+
+  <p class="text-center mt-3 text-sm text-primary-500 pt-5">
+    <a [routerLink]="['/get-started/employer']">Want to post a job?</a>
+  </p>
+</form>

@@ -1,0 +1,79 @@
+<div>
+  <div *ngIf="video" class="flex">
+    <div class="mx-auto">
+      <video-player
+        [options]="{ fluid: true, autoplay: true, aspectRatio: '4:3', controls: true, sources: [{ src: video.url, type: 'video/mp4' }]}">
+      </video-player>
+    </div>
+  </div>
+  <!-- <div class="flex mt-8">
+      <div class="mx-auto">
+        <button class="btn btn-outlined warning" (click)="reset()">Delete Recording</button>
+      </div>
+    </div> -->
+
+
+  <div [ngClass]="{'hidden': video}">
+    <div class="flex">
+      <div class="mx-auto">
+        <video id="video_{{idx}}" class="video-js vjs-default-skin flex-initial" playsinline></video>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="my-4">
+      <p class='text-sm text-error-500 text-center'>{{errorMessage}}</p>
+    </div>
+
+    <div class="flex mt-8" *ngIf="showSubmitButton">
+      <div class="mx-auto">
+        <div class="form-control mb-4">
+          <label for="prompt">Select a prompt</label>
+          <select id="prompt" (change)="promptChangeHandler($event)">
+            <option *ngFor="let prompt of prompts" [value]="prompt">{{prompt}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="flex mt-8">
+      <div class="mx-auto">
+        <p *ngIf="videoState === 'recording'" class="text-red-500 text-center mb-4">
+          <span class="h-3 w-3 mr-3">
+            <span class="animate-ping inline-block h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+            <span class="rounded-full inline-block h-3 w-3 bg-red-500 -ml-3"></span>
+          </span>
+          Recording
+        </p>
+        <div *ngIf="!hasRecording" class="space-x-4">
+          <button *ngIf="videoState !== 'recording'" class="btn btn-outlined error" (click)="record()">
+            <hero-icon icon="video-camera"></hero-icon> Record
+          </button>
+
+          <!-- <button class="btn btn-outlined primary" (click)="pause()">
+        <hero-icon icon="pause"></hero-icon>Pause
+      </button> -->
+          <!-- <button class="btn btn-outlined primary" (click)="resume()">Resume</button> -->
+
+          <button *ngIf="videoState === 'recording'" class="btn btn-outlined error" (click)="stop()">
+            <hero-icon icon="stop" class="mr-2"></hero-icon> Stop
+          </button>
+        </div>
+        <div *ngIf="hasRecording" class="space-x-4">
+
+          <button *ngIf="videoState === 'playback-paused' || videoState === 'paused'" class="btn btn-outlined primary"
+            (click)="startPlayback()">
+            <hero-icon icon="play" class="mr-2"></hero-icon> Play
+          </button>
+          <button *ngIf="videoState === 'playback-playing'" class="btn btn-outlined primary" (click)="pausePlayback()">
+            <hero-icon icon="pause" class="mr-2"></hero-icon> Pause
+          </button>
+
+          <button class="btn btn-outlined warning" (click)="reset()" [disabled]="loading">Delete Recording</button>
+          <button *ngIf="showSubmitButton" class="btn btn-filled primary" (click)="onSubmit()" [disabled]="loading">
+            <btn-spinner *ngIf="loading"></btn-spinner>
+            <span *ngIf="!loading">Submit</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

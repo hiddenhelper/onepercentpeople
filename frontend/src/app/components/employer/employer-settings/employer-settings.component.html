@@ -1,0 +1,10 @@
+<div class="flex flex-row space-x-6">
+  <div class="w-1/4">
+    <employer-settings-sidebar [currentTab]="currentTab" [items]="items" (menuEvents)="handleMenuEvents($event)"
+      [events]="eventsSubject.asObservable()"></employer-settings-sidebar>
+  </div>
+  <div class="w-3/4">
+    <employer-settings-profile *ngIf="currentTab === 'company'"></employer-settings-profile>
+    <employer-settings-banking *ngIf="currentTab === 'banking'"></employer-settings-banking>
+  </div>
+</div>

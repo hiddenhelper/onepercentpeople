@@ -1,0 +1,311 @@
+<form [formGroup]="jobForm">
+  <div class="card pb-6">
+    <div fxLayout="column">
+      <div class="heading-container pb-6" fxLayout="row wrap" fxLayoutAlign="space-between">
+        <p class="heading-left font-bold">{{steps[step].heading}}</p>
+        <p class="heading-right">Step {{step}} of 5</p>
+      </div>
+      <!-- STEP 1 -->
+      <div class='step-1' *ngIf="step === 1">
+        <div class="form-control">
+          <label for="title">Job Title</label>
+          <input type="text" formControlName="title" id="title" placeholder="Job Title" required />
+          <p class="error" *ngIf="jobForm.get('title')?.touched && jobForm.get('title')?.hasError('required')">A title
+            is required</p>
+          <p class="error" *ngIf="jobForm.get('title')?.hasError('title')">Please enter a valid title</p>
+        </div>
+
+        <div class="form-control mt-6">
+          <label>Here are some good examples:</label>
+          <ul class="list-disc list-inside mx-2">
+            <li>Tax accountant needed for office tax calculations</li>
+            <li>Staff accountant needed</li>
+            <li>Experienced accountant wanted</li>
+          </ul>
+        </div>
+
+        <div class="form-control mt-8">
+          <label for="description">Job Description</label>
+          <quill-editor id="description" placeholder="Enter job description of at least 50 characters"
+            class="job-description" formControlName="description" [required]="true" [styles]="{height: '250px'}">
+          </quill-editor>
+          <p class="error"
+            *ngIf="jobForm.get('description')?.touched && jobForm.get('description')?.hasError('required')">Job
+            Description is required
+          </p>
+          <p class="error" *ngIf="jobForm.get('description')?.hasError('minlength')">Job Description must be at least 50
+            characters
+          </p>
+        </div>
+
+      </div>
+
+      <!-- STEP 2 -->
+      <div class='step-2' *ngIf="step === 2">
+        <section class="grid grid-cols-2 gap-4 " aria-label="Select an option">
+          <ng-container *ngFor="let role of roles; let i = index">
+            <label [for]="role.id"
+              class="role px-5 flex flex-row h-16 items-center hover:border-primary-500 border border-gray-400 bg-white rounded-lg w-full text-sm transition-all"
+              [ngClass]="{'border-primary-500 shadow': jobForm.get('role')?.value?.id == role?.id }">
+              <span class="flex-grow">{{role?.title}}</span>
+              <input type="radio" name="role" formControlName="role" [id]="role.id"
+                class="rounded-full text-primary-500" [value]="role"
+                [checked]="jobForm.get('role')?.value?.id === role?.id" />
+            </label>
+          </ng-container>
+        </section>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class='step-3' *ngIf="step === 3">
+        <section aria-label="Select an option" fxLayout="column" fxLayoutGap="3%" class="">
+          <div *ngFor="let timeCommitment of timeCommitments" fxLayout="column" fxFlex="100%" class="role"
+            fxFlex.gt-sm="30%">
+            <label [for]="timeCommitment.id"
+              class="role px-5 flex flex-row h-16 items-center hover:border-primary-500 border border-gray-400 bg-white rounded-lg w-full text-sm transition-all"
+              [ngClass]="{'border-primary-500 shadow': jobForm.get('timeCommitment')?.value?.id == timeCommitment?.id }">
+              <span class="bg-gray-100 px-3 py-2 mr-2 rounded-lg">{{timeCommitment.icon}}</span>
+              <span class="flex-grow">
+                {{timeCommitment?.title}}
+                {{timeCommitment?.description}}
+              </span>
+              <input type="radio" name="timeCommitment" formControlName="timeCommitment" [id]="timeCommitment.id"
+                class="rounded-full text-primary-500" [value]="timeCommitment"
+                [checked]="jobForm.get('timeCommitment')?.value?.id === timeCommitment?.id" />
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <!-- STEP 4 -->
+      <div *ngIf="step === 4">
+        <section aria-label="Select an option" fxLayout="row wrap" fxLayoutGap="2%" fxLayoutAlign="space-between">
+          <div *ngFor="let salaryPeriod of salaryPeriods" class="salary-range"
+            [class.checked]="jobForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id" fxLayout="column" fxFlex="100%"
+            fxFlex.gt-sm="32%">
+            <div fxLayout="column" fxLayoutAlign="center center">
+
+              <label [for]="salaryPeriod.id"
+                class="role px-5 pt-4 pb-8 flex flex-row flex-wrap items-center hover:border-primary-500 border border-gray-400 bg-white rounded-lg w-full text-sm transition-all"
+                [ngClass]="{'border-primary-500 shadow': jobForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id }">
+                <!-- <span class="bg-gray-100 px-3 py-2 mr-2 rounded-lg">{{salaryPeriod.icon}}</span> -->
+                <div class="w-full text-right">
+                  <input type="radio" name="salaryPeriod" formControlName="salaryPeriod" [id]="salaryPeriod.id"
+                    class="rounded-full text-primary-500" [value]="salaryPeriod"
+                    [checked]="jobForm.get('salaryPeriod')?.value?.id === salaryPeriod?.id" />
+                </div>
+                <div class="w-full text-center">
+                  <div class="rounded-full p-3 bg-gray-100 w-16 h-16 inline-block"
+                    [ngClass]="{'bg-primary-50 bg-opacity-50 text-primary-500': jobForm.get('salaryPeriod')?.value?.id == salaryPeriod?.id }">
+                    <hero-icon [icon]="salaryPeriod.icon" icon_class="w-10 h-10"></hero-icon>
+                  </div>
+                </div>
+                <div class="w-full text-center mt-3">
+                  <span class="flex-grow text-base font-medium">
+                    {{salaryPeriod?.title}}
+                  </span>
+                </div>
+
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <div class="mt-8 mb-4 text-lg font-semibold">Salary Range</div>
+
+        <div class="" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="2%">
+          <!-- <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="32%">
+            <div class="form-control">
+              <label for="salaryMin">Min Amount</label>
+              <input placeholder="Min Amount" type="number" id="" formControlName="salaryMin" id="salaryMin" required />
+              <p class="error"
+                *ngIf="jobForm.get('salaryMin')?.touched && jobForm.get('salaryMin')?.hasError('required')">Min salary
+                is required
+              </p>
+            </div>
+          </div>
+          <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="32%">
+            <div class="form-control">
+              <label for="salaryMax">Max Amount</label>
+              <input placeholder="Max Amount" type="number" id="" formControlName="salaryMax" id="title" required />
+              <p class="error"
+                *ngIf="jobForm.get('salaryMax')?.touched && jobForm.get('salaryMax')?.hasError('required')">Max salary
+                is required
+              </p>
+            </div>
+          </div> -->
+          <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="48%">
+            <div class="form-control">
+              <label for="salaryRange">Min/Max Range</label>
+              <select id="salaryRange" formControlName="salaryRange" required>
+                <option value="" selected="selected">Please select</option>
+                <option *ngFor="let salaryRange of salaryRanges[jobForm.get('salaryPeriod')?.value?.value]" [ngValue]="salaryRange">
+                  {{salaryRange.title}}
+                </option>
+              </select>
+              <p class="error" *ngIf="jobForm.get('salaryRange')?.touched && jobForm.get('salaryRange')?.hasError('required')">
+                Please choose salary range
+              </p>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="48%">
+            <div class="form-control">
+              <label for="salaryCurrency">Currency</label>
+              <input type="text" placeholder="Pick a currency" readonly aria-label="salaryCurrency" id="salaryCurrency"
+                value="USD - United States Dollar">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class='step-5' *ngIf="step === 5">
+        <div fxLayout="column">
+          <div class="heading-container flex mb-1" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <p class="heading-left mb-0 font-bold text-xl">Basics</p>
+            <button (click)="setStep(1)" class="heading-right btn btn-icon text-gray-800 hover:text-primary-500"
+              fxLayout="row wrap" fxLayoutAlign="center center">
+              <hero-icon icon="pencil-alt"></hero-icon>
+            </button>
+          </div>
+          <div fxLayout="column" class="mb-2">
+            <p class="text-sm font-bold mb-0">Job Title</p>
+            <p class="text-sm text-gray-900 font-normal">{{jobForm.value?.title}}</p>
+          </div>
+          <div fxLayout="column" class="mb-2">
+            <p class="text-sm font-bold mb-0">Job Description</p>
+            <p class="text-sm text-gray-900 font-normal" [innerHTML]="jobForm.value?.description"></p>
+          </div>
+        </div>
+        <div class="text-error-500 text-sm">
+          <p *ngIf="jobForm.get('title')?.hasError('required')">
+            Please enter a title for the job.
+          </p>
+          <p *ngIf="jobForm.get('description')?.hasError('required')">
+            Please enter a description for the job over 50 characters long.
+          </p>
+          <p *ngIf="jobForm.get('description')?.hasError('minlength')">
+            The description is too short. It must be over 50 characters long.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="step == 4" class="card mt-4 p-8">
+    <button class="btn btn-outlined primary border w-full rounded-lg inline font-semibold" fxLayout="row wrap"
+      fxLayoutAlign="center center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add More Information
+    </button>
+  </div> -->
+
+  <ng-container *ngIf="step == 5">
+    <div class="review card mt-4">
+      <div fxLayout="column">
+        <div class="heading-container flex mb-1" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <p class="heading-left mb-0 font-bold">Role</p>
+          <button (click)="setStep(2)" class="heading-right btn btn-icon text-gray-800 hover:text-primary-500"
+            fxLayout="row wrap" fxLayoutAlign="center center">
+            <hero-icon icon="pencil-alt"></hero-icon>
+          </button>
+        </div>
+        <div fxLayout="column">
+          <p class="text-sm font-bold mb-0">Role</p>
+          <p class="text-sm text-gray-900 font-normal">{{jobForm.value?.role?.title}}</p>
+        </div>
+      </div>
+      <div class="text-error-500 text-sm">
+        <p *ngIf="jobForm.get('role')?.hasError('required')">
+          Please select role type for the job.
+        </p>
+      </div>
+    </div>
+    <div class="review card mt-4">
+      <div fxLayout="column">
+        <div class="heading-container flex mb-1" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <p class="heading-left mb-0 font-bold">Time Commitement</p>
+          <button (click)="setStep(3)" class="heading-right btn btn-icon text-gray-800 hover:text-primary-500"
+            fxLayout="row wrap" fxLayoutAlign="center center">
+            <hero-icon icon="pencil-alt"></hero-icon>
+          </button>
+        </div>
+        <div fxLayout="column">
+          <p class="text-sm font-bold mb-0">Type</p>
+          <p class="text-sm text-gray-900 font-normal">
+            {{jobForm.value?.timeCommitment?.title}} {{jobForm.value?.timeCommitment?.description}}
+          </p>
+        </div>
+      </div>
+      <div class="text-error-500 text-sm">
+        <p *ngIf="jobForm.get('timeCommitment')?.hasError('required')">
+          Please select a time commitment (full-time or part-time).
+        </p>
+      </div>
+    </div>
+    <div class="review card mt-4">
+      <div fxLayout="column">
+        <div (click)="setStep(4)" class="heading-container flex mb-1" fxLayout="row wrap"
+          fxLayoutAlign="space-between center">
+          <p class="heading-left mb-0 font-bold">Salaray Range</p>
+          <button class="heading-right btn btn-icon text-gray-800 hover:text-primary-500" fxLayout="row wrap"
+            fxLayoutAlign="center center">
+            <hero-icon icon="pencil-alt"></hero-icon>
+          </button>
+        </div>
+        <div fxLayout="column">
+          <p class="text-sm font-bold mb-0">Salary (USD)</p>
+          <p class="text-sm text-gray-900 font-normal">
+            {{jobForm.value?.salaryRange?.min}} -
+            {{jobForm.value?.salaryRange?.max}} -
+            {{jobForm.value?.salaryPeriod?.title}}
+          </p>
+        </div>
+      </div>
+      <div class="text-error-500 text-sm">
+        <p *ngIf="jobForm.get('salaryPeriod')?.hasError('required')">
+          Please select a salary type (hourly, monthly, yearly).
+        </p>
+        <p *ngIf="jobForm.get('salaryRange')?.hasError('required')">
+          <!-- Both Min and Max salary are required. -->
+          Min/Max salary range is required.
+        </p>
+      </div>
+    </div>
+  </ng-container>
+  <div>
+    <p class="text-error-500 text-center mt-4" *ngIf="errorMessage">{{errorMessage}}</p>
+  </div>
+  <div class="mt-6" fxLayout="row wrap" fxLayoutAlign="flex-end">
+    <button class="btn btn-outlined mr-6" (click)="previousStep()" *ngIf="step > 1">
+      Previous
+    </button>
+    <ng-container *ngIf="step < 5">
+      <button class="btn btn-filled primary" (click)="nextStep()" *ngIf="step < 5">
+        Next
+      </button>
+    </ng-container>
+    <ng-container *ngIf="step == 5">
+      <div *ngIf="jobId > 0">
+        <button class="btn btn-filled primary" [disabled]="loading" (click)="updateExistingJob()">
+          <btn-spinner *ngIf="loading"></btn-spinner>
+          <span *ngIf="!loading">Save</span>
+        </button>
+      </div>
+      <div *ngIf="jobId <= 0">
+        <button class="btn btn-outlined primary mr-6" [disabled]="loading" (click)="saveAndExit()">
+          <btn-spinner *ngIf="loading"></btn-spinner>
+          <span *ngIf="!loading">Save and Exit</span>
+        </button>
+
+        <button class="btn btn-filled primary" [disabled]="loading" (click)="postJob()">
+          <btn-spinner *ngIf="loading"></btn-spinner>
+          <span *ngIf="!loading">Post Job Now</span>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</form>

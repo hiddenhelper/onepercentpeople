@@ -1,0 +1,15 @@
+.item {
+  @apply flex flex-row items-center py-5 cursor-pointer group;
+
+  .icon {
+    @apply text-gray-700;
+  }
+
+  &.active {
+    @apply text-primary-600;
+
+    .icon {
+      @apply text-primary-600;
+    }
+  }
+}

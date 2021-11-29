@@ -1,0 +1,12 @@
+<div class="divide-y divide-gray-700">
+  <div [className]="currentTab === item.key? 'item active':'item'" *ngFor="let item of items"
+    (click)="menuItemClicked(item)">
+    <div class="bg-white rounded-full h-12 w-12 inline-block flex mr-4">
+      <hero-icon class="m-auto icon group-hover:text-primary-600" [icon]="item.icon"></hero-icon>
+    </div>
+    <div>
+      <p class="text-md font-semibold mb-0 group-hover:text-primary-600">{{item.title}}</p>
+      <p class="text-sm mb-0 text-gray-700">{{item.subtitle}}</p>
+    </div>
+  </div>
+</div>

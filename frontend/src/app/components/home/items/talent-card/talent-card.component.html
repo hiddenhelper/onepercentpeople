@@ -1,0 +1,8 @@
+<div class='text-center talent-card'>
+  <img [src]="talent.img" width="150" height="150" />
+  <p class='text-xl'>{{talent.name}}</p>
+  <p class="mb-0">{{talent.role}}</p>
+  <p class="previously-at text-gray-800">Previously at {{talent.previous_employer}}</p>
+
+  <button class="btn btn-filled white" [routerLink]="['/get-started/employer']">View Details</button>
+</div>

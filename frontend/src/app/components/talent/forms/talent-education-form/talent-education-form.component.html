@@ -1,0 +1,123 @@
+<form [formGroup]="educationForm" class="grid gap-4 grid-cols-2">
+  <div class="form-control">
+    <label for="education_level">Education Level</label>
+    <ng-select [items]="education_levels" #select bindLabel="title" dropdownPosition="auto" bindValue="id"
+      labelForId="education_level" placeholder="Education level" [virtualScroll]="false"
+      formControlName="education_level">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('education_level')?.touched && educationForm.get('education_level')?.hasError('required')">
+      Education level is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="field_of_study">Field of Study</label>
+    <input type="text" id="field_of_study" formControlName="field_of_study" placeholder="Field of Study">
+    <p class="error"
+      *ngIf="educationForm.get('field_of_study')?.touched && educationForm.get('field_of_study')?.hasError('required')">
+      Field of study is required
+    </p>
+  </div>
+
+  <div class="form-control col-span-2">
+    <label for="school">School Name</label>
+    <input type="text" id="school" formControlName="school_name" placeholder="School Name">
+    <p class="error"
+      *ngIf="educationForm.get('school_name')?.touched && educationForm.get('school_name')?.hasError('required')">
+      School name is required
+    </p>
+  </div>
+
+
+  <div class="form-control">
+    <label for="country">Country</label>
+    <ng-select [items]="countries" #select bindLabel="name" dropdownPosition="auto" bindValue="id" labelForId="country"
+      placeholder="Select the country you studied in" [virtualScroll]="true" formControlName="country">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.name}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('country')?.touched && educationForm.get('country')?.hasError('required')">
+      Country is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="city">City</label>
+    <input type="text" id="city" formControlName="city" placeholder="City">
+    <p class="error" *ngIf="educationForm.get('city')?.touched && educationForm.get('city')?.hasError('required')">
+      City is required
+    </p>
+  </div>
+
+  <!-- <input type="checkbox" class="" />I currently go to school here. -->
+
+  <div class="form-control">
+    <label for="from_month">From Month</label>
+    <ng-select [items]="months" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="from_month" placeholder="To Month" [virtualScroll]="false" formControlName="from_month">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('from_month')?.touched && educationForm.get('from_month')?.hasError('required')">
+      From month is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="from_year">From year</label>
+    <ng-select [items]="years" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="from_year" placeholder="To year" [virtualScroll]="false" formControlName="from_year">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('from_year')?.touched && educationForm.get('from_year')?.hasError('required')">
+      From year is required
+    </p>
+  </div>
+
+
+  <div class="form-control">
+    <label for="to_month">To Month</label>
+    <ng-select [items]="months" #select bindLabel="title" dropdownPosition="auto" bindValue="value"
+      labelForId="to_month" placeholder="To Month" [virtualScroll]="false" formControlName="to_month">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('to_month')?.touched && educationForm.get('to_month')?.hasError('required')">
+      To month is required
+    </p>
+  </div>
+
+  <div class="form-control">
+    <label for="to_year">To year</label>
+    <ng-select [items]="years" #select bindLabel="title" dropdownPosition="auto" bindValue="value" labelForId="to_year"
+      placeholder="To year" [virtualScroll]="false" formControlName="to_year">
+      <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+        <div><span>{{item.title}}</span></div>
+      </ng-template>
+    </ng-select>
+    <p class="error"
+      *ngIf="educationForm.get('to_year')?.touched && educationForm.get('to_year')?.hasError('required')">
+      To year is required
+    </p>
+  </div>
+
+  <span class="text-error-500">{{errorMessage}}</span>
+
+  <button class="btn btn-filled primary" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Save</span>
+  </button>
+</form>

@@ -1,0 +1,12 @@
+<app-page-loading *ngIf="!loaded"></app-page-loading>
+<div *ngIf="loaded">
+  <div *ngIf="jobs.length > 0">
+    <employer-job-list-item *ngFor="let job of jobs" [job]="job"></employer-job-list-item>
+  </div>
+  <div *ngIf="jobs.length === 0" class="text-center">
+    <p class="text-3xl my-6">You haven't posted any jobs</p>
+    <p class="text-xl"><a class="text-primary-500" href="/employer/jobs/create">Create your first job posting</a> and it
+      will show up here when
+      you're done.</p>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+// Abstracts
+@import './abstracts/palette.scss';
+@import './abstracts/gutters.scss';
+@import './abstracts/toastr.scss';
+
+// Overrides
+@import './overrides/typography.scss';
+
+@import './styles.scss';
+@import './components.scss';
+
+
+// Tailwind
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+// Third-party
+@import '~video.js/dist/video-js.css';
+@import '~videojs-record/dist/css/videojs.record.css';
+@import '~ngx-toastr/toastr';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';

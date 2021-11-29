@@ -1,0 +1,27 @@
+<div [formGroup]="englishProficiencyForm">
+  <div aria-label="Select an option" class="py-6 w-full grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div *ngFor="let englishProficiency of englishProficiencies">
+      <label [for]="englishProficiency.id"
+        class="role px-5 flex flex-row h-16 items-center hover:border-primary-500 border border-gray-400 bg-white rounded-lg w-full text-sm transition-all"
+        [ngClass]="{'border-primary-500 shadow': englishProficiencyForm.get('englishProficiency')?.value?.id == englishProficiency?.id }">
+        <span class="bg-gray-100 px-3 py-2 mr-2 rounded-lg">{{englishProficiency.icon}}</span>
+        <span class="flex-grow">
+          {{englishProficiency?.title}}
+        </span>
+        <input type="radio" name="englishProficiency" formControlName="englishProficiency" [id]="englishProficiency.id"
+          class="rounded-full text-primary-500" [value]="englishProficiency"
+          [checked]="englishProficiencyForm.get('englishProficiency')?.value?.id === englishProficiency?.id" />
+      </label>
+    </div>
+  </div>
+
+  <p class="text-error-500 w-full text-center"
+    *ngIf="englishProficiencyForm.get('englishProficiency')?.touched && englishProficiencyForm.get('englishProficiency')?.hasError('required')">
+    This field is required
+  </p>
+
+  <button class="btn btn-filled primary" *ngIf="showButtons" (click)="onSubmit()" [disabled]="loading">
+    <btn-spinner *ngIf="loading"></btn-spinner>
+    <span *ngIf="!loading">Save</span>
+  </button>
+</div>

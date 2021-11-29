@@ -1,0 +1,26 @@
+<div class="card space-y-4" *ngIf="loaded">
+  <p class="text-md text-center mb-2 font-semibold">{{job.title}}</p>
+  <div class="flex flex-row">
+    <div class="text-sm text-gray-700 flex">
+      <hero-icon class="mr-2" icon="briefcase"></hero-icon> Type
+    </div>
+    <span class="flex-grow text-right">{{job.employment_type?.title}}</span>
+  </div>
+  <div class="flex flex-row">
+    <span class="text-sm text-gray-700 flex">
+      <hero-icon class="mr-2" icon="clock"></hero-icon> Role
+    </span>
+    <span class="flex-grow text-right">{{job.role?.title}}</span>
+  </div>
+  <div class="flex flex-row">
+    <span class="text-sm text-gray-700 flex">
+      <hero-icon class="text-xs mr-2" icon="currency-dollar"></hero-icon> Salary
+    </span>
+    <span class="flex-grow text-right">${{job.min_salary}} - ${{job.max_salary}} /{{job.salary_period}}</span>
+  </div>
+  <hr class="my-2" />
+  <p class="text-center">
+    <a class="hover:text-primary-500" title="View job posting details" [href]="view_job_url">View
+      Details</a>
+  </p>
+</div>

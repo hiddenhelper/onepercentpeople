@@ -1,0 +1,21 @@
+<app-layout-default>
+  <div class='login' fxLayout="row wrap" fxLayoutAlign="center">
+    <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="60%">
+      <div class='' fxLayout="row" fxLayoutAlign="center">
+        <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="70%">
+          <h1 class="font-bold text-3xl mb-6">
+            Log in to your account
+          </h1>
+          <p class="text-sm text-gray-800">Don't have an account? Sign Up as an <a
+              class="text-primary-500 font-semibold" [routerLink]="['/get-started/employer']">employer</a> or <a
+              class="text-primary-500 font-semibold" [routerLink]="['/get-started/talent']">employee</a>
+          </p>
+          <app-login-form class="mt-10"></app-login-form>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex="100%" fxFlex.gt-sm="40%" class="preview">
+      <img src="/assets/images/screenshots/employer-dashboard.png" />
+    </div>
+  </div>
+</app-layout-default>

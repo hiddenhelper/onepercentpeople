@@ -1,0 +1,20 @@
+<div class="main-content">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around">
+    <div class="bg-gray-200 min-h-screen" fxLayout="column" fxFlex="0%" fxFlex.gt-sm="20%"
+      [fxFlexOrder]="sideAreaPosition === 'left'? 0:1">
+      <div class="my-auto mx-auto px-4">
+        <img src="/assets/images/icons/quotation.svg" width="50" height="50" class="opacity-20">
+        <span class="text-xs text-gray-900">{{quote}}</span>
+      </div>
+    </div>
+    <div class="px-16 pb-16" fxLayout="column" fxFlex="100%" fxFlex.gt-sm="80%"
+      [fxFlexOrder]="sideAreaPosition === 'left'? 1:0">
+      <a class="ml-2 mb-4 mt-4 text-primary-500 flex flex-row site-title text-sm" [routerLink]="['/']"
+        title="One Percent People | Home">
+        <svg-icon class="flex-initial" src="/assets/images/logos/logo.svg"></svg-icon>
+        <span class="flex-initial ml-4 font-semibold">One Percent<br />People</span>
+      </a>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
